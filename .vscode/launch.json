@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Start Project",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/run.py",
+            "console": "internalConsole",
+            "gevent": true,
+            "serverReadyAction": {
+                "pattern": "Running on (https?://\\S+)", // Да съвпада с изхода на сървъра
+                "uriFormat": "%s/test_device_interface", // Добавя пътя към основния адрес
+                "action": "openExternally"
+            }
+        }
+    ]
+}
