@@ -82,6 +82,12 @@
         "connected": "Успешно повезивање са сервером."
     },
     "log": {
+        "tcpConnectionOpened": "TCP веза ка {host}:{port} је успешно отворена.",
+        "tcpConnectionOpenError": "Грешка при отварању TCP везе ка {host}:{port}: {error}",
+        "tcpConnectionClosed": "TCP веза ка {host}:{port} је затворена.",
+        "tcpConnectionTimeout": "Timeout при повезивању ка {host}:{port}",
+        "tcpConnectionRefused": "Веза ка {host}:{port} је одбијена",
+        "tcpConnectionReset": "Веза ка {host}:{port} је прекинута од стране peer-а",
         "comPortOpened": "COM порт {port} је успешно отворен.",
         "comPortOpenError": "Грешка при отварању COM порта {port}: {error}",
         "comPortClosed": "COM порт {port} је затворен.",

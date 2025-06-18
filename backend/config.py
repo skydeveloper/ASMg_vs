@@ -8,8 +8,12 @@ class Config:
     HOST = '0.0.0.0' # Позволява достъп от други машини в мрежата
     APP_NAME = "ASMg"
 
-    # Barcode Scanner Configuration
-    BARCODE_SCANNER_PORT = 'COM3' # Уверете се, че това е правилният порт
+    # Barcode Scanner Configuration - TCP вместо RS232
+    BARCODE_SCANNER_HOST = '192.168.0.7'  # IP адрес на баркод скенера
+    BARCODE_SCANNER_PORT = 20108  # TCP порт на баркод скенера
+    
+    # Стари RS232 настройки (запазени за обратна съвместимост)
+    BARCODE_SCANNER_COM_PORT = 'COM3'  # Уверете се, че това е правилният порт
     BARCODE_SCANNER_BAUDRATE = 9600
 
     # OPC UA Server Configuration (примерни стойности)

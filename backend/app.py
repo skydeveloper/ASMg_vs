@@ -99,13 +99,17 @@ def add_log_message(message_key, level='info', **kwargs):
 
 
 # --- Инициализация на Услугите ---
-from backend.services.com_port_manager import ComPortManager
+from backend.services.tcp_barcode_manager import TCPBarcodeManager
 from backend.services.data_simulator import DataSimulatorThread
 from backend.api import register_api_routes
 
-com_port_scanner = ComPortManager(port=Config.BARCODE_SCANNER_PORT, baudrate=Config.BARCODE_SCANNER_BAUDRATE,
-                                  socketio=socketio)
-logger.info(f"ComPortManager инициализиран за порт {Config.BARCODE_SCANNER_PORT}.")
+# Използваме TCP мениджъра вместо COM порт мениджъра
+tcp_barcode_scanner = TCPBarcodeManager(
+    host=Config.BARCODE_SCANNER_HOST, 
+    port=Config.BARCODE_SCANNER_PORT, 
+    socketio=socketio
+)
+logger.info(f"TCPBarcodeManager инициализиран за {Config.BARCODE_SCANNER_HOST}:{Config.BARCODE_SCANNER_PORT}.")
 
 data_simulator = DataSimulatorThread(socketio, global_line_status_data, add_log_message)
 logger.info("DataSimulatorThread инициализиран.")
@@ -156,14 +160,14 @@ def handle_connect():
     global com_reader_started
     logger.info(f"Клиент {request.sid} се свърза.")
     if not com_reader_started:  # Стартираме четенето от COM порта само веднъж
-        if com_port_scanner and com_port_scanner.is_running:  # Проверяваме дали портът е отворен
-            com_port_scanner.start_reading_task()
+        if tcp_barcode_scanner and tcp_barcode_scanner.is_running:  # Проверяваме дали портът е отворен
+            tcp_barcode_scanner.start_reading_task()
             com_reader_started = True
-        elif com_port_scanner and not com_port_scanner.is_running:
+        elif tcp_barcode_scanner and not tcp_barcode_scanner.is_running:
             logger.warning(
-                "COM Port reader task not started because com_port_scanner.is_running is False (port may not be open).")
+                "COM Port reader task not started because tcp_barcode_scanner.is_running is False (port may not be open).")
         else:
-            logger.error("COM Port reader task not started because com_port_scanner is None or port not initialized.")
+            logger.error("COM Port reader task not started because tcp_barcode_scanner is None or port not initialized.")
     handle_request_initial_data()
 
 

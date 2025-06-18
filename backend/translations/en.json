@@ -82,6 +82,12 @@
         "connected": "Successfully connected to the server."
     },
     "log": {
+        "tcpConnectionOpened": "TCP connection to {host}:{port} opened successfully.",
+        "tcpConnectionOpenError": "Error opening TCP connection to {host}:{port}: {error}",
+        "tcpConnectionClosed": "TCP connection to {host}:{port} closed.",
+        "tcpConnectionTimeout": "Timeout connecting to {host}:{port}",
+        "tcpConnectionRefused": "Connection refused to {host}:{port}",
+        "tcpConnectionReset": "Connection reset by peer for {host}:{port}",
         "comPortOpened": "COM port {port} opened successfully.",
         "comPortOpenError": "Error opening COM port {port}: {error}",
         "comPortClosed": "COM port {port} closed.",

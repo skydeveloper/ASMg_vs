@@ -90,6 +90,12 @@
         "connected": "Успешно свързване със сървъра."
     },
     "log": {
+        "tcpConnectionOpened": "TCP връзка към {host}:{port} е отворена успешно.",
+        "tcpConnectionOpenError": "Грешка при отваряне на TCP връзка към {host}:{port}: {error}",
+        "tcpConnectionClosed": "TCP връзка към {host}:{port} е затворена.",
+        "tcpConnectionTimeout": "Timeout при свързване към {host}:{port}",
+        "tcpConnectionRefused": "Връзката към {host}:{port} е отказана",
+        "tcpConnectionReset": "Връзката към {host}:{port} е прекъсната от отдалечената страна",
         "comPortOpened": "COM порт {port} е отворен успешно.",
         "comPortOpenError": "Грешка при отваряне на COM порт {port}: {error}",
         "comPortClosed": "COM порт {port} е затворен.",

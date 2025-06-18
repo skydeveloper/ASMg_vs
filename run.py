@@ -15,9 +15,9 @@ print(f"DEBUG: [run.py] project_root is {project_root}")
 print("DEBUG: [run.py] Преди импортиране на backend.app")
 try:
     # Импортираме инстанциите, които са създадени на модулно ниво в backend/app.py
-    from backend.app import app, socketio, com_port_scanner, data_simulator
+    from backend.app import app, socketio, tcp_barcode_scanner, data_simulator
     from backend.config import Config
-    print("DEBUG: [run.py] Успешно импортиране на backend.app, app и socketio, com_port_scanner, data_simulator, Config")
+    print("DEBUG: [run.py] Успешно импортиране на backend.app, app и socketio, tcp_barcode_scanner, data_simulator, Config")
 except ImportError as e:
     print(f"DEBUG: [run.py] Грешка при импорт (ImportError): {e}")
     import traceback
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     print(f" {getattr(Config, 'APP_NAME', 'ASMg')} Application Starting ")
     print("-" * 40)
     print(f"  * Debug mode: {'on' if debug_mode else 'off'}")
-    print(f"  * Configured COM Port: {Config.BARCODE_SCANNER_PORT} at {Config.BARCODE_SCANNER_BAUDRATE} baud")
+    print(f"  * Configured TCP Barcode Scanner: {Config.BARCODE_SCANNER_HOST}:{Config.BARCODE_SCANNER_PORT}")
     print(f"  * Running on: http://{host_setting}:{port}")
     print(f"  * Test page:   http://{host_setting}:{port}/test_device_interface")
     print(f"  * Достъпно на (локално): {app_url_local}")
@@ -79,12 +79,12 @@ if __name__ == '__main__':
     print("Натиснете CTRL+C за спиране на сървъра.")
 
     # Опитваме да отворим COM порта преди стартиране на сървъра
-    if com_port_scanner:
-        print("DEBUG: [run.py] Опит за отваряне на COM порт...")
-        if not com_port_scanner.open_port():
-            print(f"ПРЕДУПРЕЖДЕНИЕ: Неуспешно отваряне на COM порт {Config.BARCODE_SCANNER_PORT}. Баркод скенерът няма да работи.")
+    if tcp_barcode_scanner:
+        print("DEBUG: [run.py] Опит за отваряне на TCP порт...")
+        if not tcp_barcode_scanner.open_port():
+            print(f"ПРЕДУПРЕЖДЕНИЕ: Неуспешно отваряне на TCP порт {Config.BARCODE_SCANNER_PORT}. Баркод скенерът няма да работи.")
         else:
-            print(f"DEBUG: [run.py] COM порт {Config.BARCODE_SCANNER_PORT} е отворен.")
+            print(f"DEBUG: [run.py] TCP порт {Config.BARCODE_SCANNER_PORT} е отворен.")
 
     # Стартираме симулатора на данни, ако е в debug режим
     if Config.DEBUG and data_simulator:
@@ -110,9 +110,9 @@ if __name__ == '__main__':
         traceback.print_exc()
     finally:
         print("DEBUG: [run.py] Изпълнява се finally блокът в run.py.")
-        if com_port_scanner and com_port_scanner.is_running:
-            print("DEBUG: [run.py] Затваряне на COM порт...")
-            com_port_scanner.close_port()
+        if tcp_barcode_scanner and tcp_barcode_scanner.is_running:
+            print("DEBUG: [run.py] Затваряне на TCP порт...")
+            tcp_barcode_scanner.close_port()
         if data_simulator and data_simulator.is_alive():
             print("DEBUG: [run.py] Спиране на симулатора на данни...")
             data_simulator.stop()
