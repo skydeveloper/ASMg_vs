@@ -32,3 +32,36 @@ class Config:
     TRACEABILITY_API_URL = os.environ.get('TRACEABILITY_API_URL', "http://oracleapi:3000")
     TRACEABILITY_API_KEY = os.environ.get('TRACEABILITY_API_KEY', "2512A449C4B001DBE0639F2B230AF06F")
     TRACEABILITY_WORKPLACE_ID = os.environ.get('TRACEABILITY_WORKPLACE_ID', "2400") # Използвахме "2400" в тестовете
+
+    # --- Barcode Cameras Configuration ---
+    # Всяка камера има два TCP порта:
+    # - Порт за команди (TRG): 2006
+    # - Порт за получаване на баркод: 2005
+    # Пример за получени данни: PDE6N01HM0;334000;203500;-3493
+    # Първата стойност е баркодът, останалите са данни за качеството (ще бъдат уточнени допълнително)
+    BARCODE_CAMERAS = [
+        {
+            'name': 'Camera 1',
+            'ip': '192.168.0.3',
+            'command_port': 2006,
+            'barcode_port': 2005,
+            'carousel': 1,
+            'position': 1
+        },
+        {
+            'name': 'Camera 2',
+            'ip': '192.168.0.4',
+            'command_port': 2006,
+            'barcode_port': 2005,
+            'carousel': 1,
+            'position': 2
+        },
+        {
+            'name': 'Camera 3',
+            'ip': '192.168.0.5',
+            'command_port': 2006,
+            'barcode_port': 2005,
+            'carousel': 1,
+            'position': 3
+        }
+    ]

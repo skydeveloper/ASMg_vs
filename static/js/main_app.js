@@ -234,4 +234,73 @@ document.addEventListener('DOMContentLoaded', function () {
             socket.emit('logout_request');
         });
     }
+
+    // --- BARCODE CAMERA 1 AUTO-READ ---
+    const v1p1ModuleIdSpan = document.getElementById('v1p1-module-id');
+    const v1p2ModuleIdSpan = document.getElementById('v1p2-module-id');
+    const v1p3ModuleIdSpan = document.getElementById('v1p3-module-id');
+    const v1p1StatusSpan = document.getElementById('v1p1-status-text');
+    const v1p2StatusSpan = document.getElementById('v1p2-status-text');
+    const v1p3StatusSpan = document.getElementById('v1p3-status-text');
+    function fetchBarcodeCameras() {
+        fetch('/api/barcode_cameras/read')
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.positions) {
+                    // Позиция 1
+                    const cam1 = data.positions[1] || {};
+                    v1p1ModuleIdSpan.textContent = cam1.value || '--';
+                    if (cam1.status === 'success') {
+                        v1p1StatusSpan.textContent = 'Успешно прочетен';
+                    } else if (cam1.status === 'fail') {
+                        v1p1StatusSpan.textContent = 'Неуспешно четене';
+                    } else if (cam1.status === 'timeout') {
+                        v1p1StatusSpan.textContent = 'Проблем с камерата';
+                    } else {
+                        v1p1StatusSpan.textContent = '--';
+                    }
+                    // Позиция 2
+                    const cam2 = data.positions[2] || {};
+                    v1p2ModuleIdSpan.textContent = cam2.value || '--';
+                    if (cam2.status === 'success') {
+                        v1p2StatusSpan.textContent = 'Успешно прочетен';
+                    } else if (cam2.status === 'fail') {
+                        v1p2StatusSpan.textContent = 'Неуспешно четене';
+                    } else if (cam2.status === 'timeout') {
+                        v1p2StatusSpan.textContent = 'Проблем с камерата';
+                    } else {
+                        v1p2StatusSpan.textContent = '--';
+                    }
+                    // Позиция 3
+                    const cam3 = data.positions[3] || {};
+                    v1p3ModuleIdSpan.textContent = cam3.value || '--';
+                    if (cam3.status === 'success') {
+                        v1p3StatusSpan.textContent = 'Успешно прочетен';
+                    } else if (cam3.status === 'fail') {
+                        v1p3StatusSpan.textContent = 'Неуспешно четене';
+                    } else if (cam3.status === 'timeout') {
+                        v1p3StatusSpan.textContent = 'Проблем с камерата';
+                    } else {
+                        v1p3StatusSpan.textContent = '--';
+                    }
+                } else {
+                    v1p1ModuleIdSpan.textContent = '--';
+                    v1p2ModuleIdSpan.textContent = '--';
+                    v1p3ModuleIdSpan.textContent = '--';
+                    v1p1StatusSpan.textContent = '--';
+                    v1p2StatusSpan.textContent = '--';
+                    v1p3StatusSpan.textContent = '--';
+                }
+            })
+            .catch(() => {
+                v1p1ModuleIdSpan.textContent = '--';
+                v1p2ModuleIdSpan.textContent = '--';
+                v1p3ModuleIdSpan.textContent = '--';
+                v1p1StatusSpan.textContent = '--';
+                v1p2StatusSpan.textContent = '--';
+                v1p3StatusSpan.textContent = '--';
+            });
+    }
+    setInterval(fetchBarcodeCameras, 2000);
+    // --- END BARCODE CAMERA 1 AUTO-READ ---
 });

@@ -13,6 +13,7 @@ from backend.config import Config
 from backend.translations.translation_manager import load_translations, get_translation
 from backend.services.traceability_api import TraceabilityAPI
 from backend.services.device_communicator import DeviceCommunicator
+from backend.services.barcode_camera_manager import BarcodeCameraManager
 
 # --- Конфигурация на Логването ---
 logger = logging.getLogger("ASMg_App")  # Използваме едно и също име за логера навсякъде
@@ -352,6 +353,27 @@ def handle_device_report():
 
     # 5. Връщаме отговор на DeviceClientApp, че сме получили доклада успешно
     return jsonify({"status": "report_received_ok"}), 200
+
+
+@app.route('/api/barcode_cameras/read', methods=['GET'])
+def read_barcode_cameras():
+    """
+    Чете баркодове от трите камери на карусел 1 и връща резултатите като JSON.
+    Връща статус и стойност за всяка позиция.
+    """
+    manager = BarcodeCameraManager()
+    results = manager.read_all_cameras()  # {позиция: {'status', 'value'}}
+    for pos, res in results.items():
+        if res['status'] == 'success':
+            logger.info(f"[API] Карусел 1, Позиция {pos}: Успешно прочетен баркод: {res['value']}")
+        elif res['status'] == 'fail':
+            logger.warning(f"[API] Карусел 1, Позиция {pos}: Камерата върна FAIL (неуспешно четене)")
+        elif res['status'] == 'timeout':
+            logger.error(f"[API] Карусел 1, Позиция {pos}: Проблем с камерата (timeout или комуникационна грешка)")
+    return jsonify({
+        'carousel': 1,
+        'positions': results
+    })
 
 
 logger.info("Конфигурацията на Flask приложението и SocketIO е завършена.")

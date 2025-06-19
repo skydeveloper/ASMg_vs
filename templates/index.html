@@ -69,7 +69,7 @@
                         {% set tt1_pos_data = initial_data.get('turntable1', {}).get(tt1_pos_i, {}) %}
                         <div class="bg-gray-600 p-3 rounded-lg mb-2">
                             <h4 class="font-semibold" data-translate-key="turntable1.position{{i}}"></h4>
-                            <p><span data-translate-key="turntable.moduleIdLabel"></span>: <span id="v1p{{i}}-module-id">{{ tt1_pos_data.get('moduleId', '--') }}</span></p>
+                            <p><span data-translate-key="turntable.moduleIdLabel"></span>: <span id="v1p{{i}}-module-id">{{ tt1_pos_data.get('moduleId', '--') if i != 1 else '--' }}</span></p>
                             <p><span data-translate-key="turntable.statusLabel"></span>: <span id="v1p{{i}}-status-text" data-translate-key="{{ tt1_pos_data.get('status', 'status.idle')}}"></span></p>
                         </div>
                         {% endfor %}
