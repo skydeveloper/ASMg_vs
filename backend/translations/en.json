@@ -117,5 +117,10 @@
         "sendStartCommand": "Send Command to Device Client (via ASMg)",
         "logTitle": "Test Interface Log:",
         "logWaiting": "Waiting for events..."
+    },
+    "cameraStatus": {
+        "success": "Barcode read successfully",
+        "fail": "Failed to read barcode",
+        "timeout": "Camera communication problem"
     }
 }

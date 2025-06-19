@@ -122,7 +122,7 @@
     "error": {
         "missingTestData": "Липсват данни за стартиране на тест/задача към устройство."
     },
-"testInterface": {
+    "testInterface": {
         "title": "АСМг - Тестов Интерфейс за Устройства",
         "header": "Тестов Интерфейс за Device Clients",
         "sendCommandTitle": "Изпрати команда към Device Client",
@@ -137,5 +137,10 @@
         "logWaiting": "Очаквам събития...",
         "receivedReportsTitle": "Получени доклади от устройства",
         "waitingForReports": "Очаквам доклади от подчинени приложения..."
+    },
+    "cameraStatus": {
+        "success": "Успешно прочетен баркод",
+        "fail": "Неуспешно четене на баркод",
+        "timeout": "Проблем с камерата"
     }
 }

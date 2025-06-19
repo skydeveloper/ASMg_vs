@@ -251,11 +251,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     const cam1 = data.positions[1] || {};
                     v1p1ModuleIdSpan.textContent = cam1.value || '--';
                     if (cam1.status === 'success') {
-                        v1p1StatusSpan.textContent = 'Успешно прочетен';
+                        v1p1StatusSpan.textContent = getTranslation('cameraStatus.success');
                     } else if (cam1.status === 'fail') {
-                        v1p1StatusSpan.textContent = 'Неуспешно четене';
+                        v1p1StatusSpan.textContent = getTranslation('cameraStatus.fail');
                     } else if (cam1.status === 'timeout') {
-                        v1p1StatusSpan.textContent = 'Проблем с камерата';
+                        v1p1StatusSpan.textContent = getTranslation('cameraStatus.timeout');
                     } else {
                         v1p1StatusSpan.textContent = '--';
                     }
@@ -263,11 +263,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     const cam2 = data.positions[2] || {};
                     v1p2ModuleIdSpan.textContent = cam2.value || '--';
                     if (cam2.status === 'success') {
-                        v1p2StatusSpan.textContent = 'Успешно прочетен';
+                        v1p2StatusSpan.textContent = getTranslation('cameraStatus.success');
                     } else if (cam2.status === 'fail') {
-                        v1p2StatusSpan.textContent = 'Неуспешно четене';
+                        v1p2StatusSpan.textContent = getTranslation('cameraStatus.fail');
                     } else if (cam2.status === 'timeout') {
-                        v1p2StatusSpan.textContent = 'Проблем с камерата';
+                        v1p2StatusSpan.textContent = getTranslation('cameraStatus.timeout');
                     } else {
                         v1p2StatusSpan.textContent = '--';
                     }
@@ -275,11 +275,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     const cam3 = data.positions[3] || {};
                     v1p3ModuleIdSpan.textContent = cam3.value || '--';
                     if (cam3.status === 'success') {
-                        v1p3StatusSpan.textContent = 'Успешно прочетен';
+                        v1p3StatusSpan.textContent = getTranslation('cameraStatus.success');
                     } else if (cam3.status === 'fail') {
-                        v1p3StatusSpan.textContent = 'Неуспешно четене';
+                        v1p3StatusSpan.textContent = getTranslation('cameraStatus.fail');
                     } else if (cam3.status === 'timeout') {
-                        v1p3StatusSpan.textContent = 'Проблем с камерата';
+                        v1p3StatusSpan.textContent = getTranslation('cameraStatus.timeout');
                     } else {
                         v1p3StatusSpan.textContent = '--';
                     }
